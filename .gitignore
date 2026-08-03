@@ -54,6 +54,8 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# GitHub
-.github/
+# GitHub (but keep workflow files trackable)
+.github/*
+!.github/workflows/
+!.github/workflows/**
 ```
