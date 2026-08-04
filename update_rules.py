@@ -218,11 +218,11 @@ def main():
                         group_sets[cls].add(cnorm)
                         groups[cls].append(cnorm)
 
-        hosted_url = f"https://raw.githubusercontent.com/{owner}/{repo}/refs/heads/{branch}/rules/{name.replace('.txt','.module')}"
+        hosted_url = f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/rules/{name.replace('.txt','.module')}"
         friendly_name, desc = META.get(name, (name, ""))
         write_module_file(name, hosted_url, friendly_name, desc, rules)
 
-    base = f"https://raw.githubusercontent.com/{owner}/{repo}/refs/heads/{branch}/rules"
+    base = f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/rules"
     write_module_file("merged_direct.txt", f"{base}/merged_direct.module", "Merged Direct", "合并: DIRECT 规则", groups["DIRECT"])
     write_module_file("merged_proxy.txt",  f"{base}/merged_proxy.module",  "Merged Proxy",  "合并: PROXY 规则", groups["PROXY"])
     write_module_file("merged_reject.txt", f"{base}/merged_reject.module", "Merged Reject", "合并: REJECT 规则", groups["REJECT"])

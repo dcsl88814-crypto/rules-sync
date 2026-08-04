@@ -33,14 +33,16 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 ### 方式一：订阅模块（推荐，自动更新）
 
 1. 打开 Shadowrocket，进入 **配置 (Config)** 页，点击右上角 **+**，选择 **添加模块 (Add Module)**。
-2. 粘贴模块订阅 URL：
-   - 全部规则（去重合并）：`https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_all.module`
-   - 仅直连：`https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_direct.module`
-   - 仅代理：`https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_proxy.module`
-   - 仅拦截：`https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_reject.module`
+2. 粘贴模块订阅 URL（jsDelivr CDN，国内可直连；若需绕过 CDN 缓存，可在 URL 末尾加 `?v=日期`，或改用下方 raw 链接）：
+   - 全部规则（去重合并）：`https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module`
+   - 仅直连：`https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_direct.module`
+   - 仅代理：`https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_proxy.module`
+   - 仅拦截：`https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_reject.module`
 3. 添加后可手动更新，或等仓库的 Actions 每天 02:00 UTC 自动更新规则后下拉刷新。
 
 > 提示：`merged_all.module` 包含全部规则（直连/代理/拦截去重合并），普通用户订阅这一个即可。
+>
+> 备用（GitHub raw，需能访问 GitHub）：`https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_all.module`（其余文件同理，把文件名替换为 `merged_direct` / `merged_proxy` / `merged_reject`）。
 
 ### 方式二：导入示例配置
 
@@ -52,7 +54,7 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 
 ```conf
 [General]
-update-url = https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/examples/example.conf
+update-url = https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/example.conf
 bypass-system = true
 skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com
 tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32, ff02::fb/128
@@ -90,17 +92,17 @@ use-local-host-item-for-proxy = false
 AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
 
 # Rule Sets (individual modules from rules/)
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/direct.module,DIRECT
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/proxy.module,PROXY
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/reject.module,REJECT
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/private.module,DIRECT
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/apple.module,DIRECT
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/icloud.module,DIRECT
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/google.module,DIRECT
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/gfw.module,PROXY
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/tld-not-cn.module,PROXY
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/telegramcidr.module,PROXY
-RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/cncidr.module,DIRECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/direct.module,DIRECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/proxy.module,PROXY
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/reject.module,REJECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/private.module,DIRECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/apple.module,DIRECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/icloud.module,DIRECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/google.module,DIRECT
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/gfw.module,PROXY
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/tld-not-cn.module,PROXY
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/telegramcidr.module,PROXY
+RULE-SET,https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/cncidr.module,DIRECT
 
 # LAN
 IP-CIDR,192.168.0.0/16,DIRECT
