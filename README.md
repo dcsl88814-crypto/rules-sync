@@ -52,7 +52,7 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 
 ```conf
 [General]
-update-url = https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/example.conf
+update-url = https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/examples/example.conf
 bypass-system = true
 skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com
 tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32, ff02::fb/128
