@@ -119,7 +119,7 @@ FINAL,PROXY
 
 ## License
 
-本项目采用 [MIT License](LICENSE)。
+本项目采用 [GNU General Public License v3.0](LICENSE)（GPL-3.0）。
 
 Copyright (c) 2026 vycsl-dev
 
