@@ -8,6 +8,17 @@ Shadowrocket / Surge 规则模块管理仓库。自动从 [Loyalsoldier/surge-ru
 
 Sources: [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)
 
+## 规则转换与正则规则
+
+`update_rules.py` 会把上游规则逐行转换成 Shadowrocket 兼容的规则，其中包含用正则表达式生成的规则：
+
+- `||example.com^`（adblock 域名）→ `DOMAIN-SUFFIX,example.com,POLICY`
+- `|http://example.com/path`（adblock 完整 URL）→ `URL-REGEX,^http://example\.com/path.*,POLICY`（通过 `re.escape` 把 URL 转成正则）
+- `1.2.3.4/24` → `IP-CIDR,1.2.3.4/24,POLICY`
+- 含 `*` 的域名 → `DOMAIN-KEYWORD,xxx,POLICY`
+
+生成的规则按策略拆分合并成 `merged_direct/proxy/reject/all.module`，方便直接订阅。
+
 ## 项目结构
 
 - `update_rules.py`：下载规则源，转换为 `.module` 文件，并生成 `merged_direct/proxy/reject/all.module`。
@@ -78,8 +89,18 @@ use-local-host-item-for-proxy = false
 # Block HTTP3/QUIC
 AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
 
-# Rule Sets
-
+# Rule Sets (individual modules from rules/)
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/direct.module,DIRECT
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/proxy.module,PROXY
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/reject.module,REJECT
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/private.module,DIRECT
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/apple.module,DIRECT
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/icloud.module,DIRECT
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/google.module,DIRECT
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/gfw.module,PROXY
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/tld-not-cn.module,PROXY
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/telegramcidr.module,PROXY
+RULE-SET,https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/cncidr.module,DIRECT
 
 # LAN
 IP-CIDR,192.168.0.0/16,DIRECT
@@ -94,3 +115,10 @@ GEOIP,CN,DIRECT
 FINAL,PROXY
 ```
 
+## License
+
+本项目采用 [MIT License](LICENSE)。
+
+Copyright (c) 2026 vycsl-dev
+
+> 注意：本项目仅转换/聚合上游规则。上游规则数据版权归 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)（MIT License）所有。
