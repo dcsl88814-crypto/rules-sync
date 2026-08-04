@@ -158,6 +158,8 @@ def write_module_file(name: str, url_hosted: str, friendly_name: str, desc: str,
         f"#!url={url_hosted}",
         f"#!name={friendly_name}",
         f"#!desc={desc}",
+        "",
+        "[Rule]",
         ""
     ]
     content = "\n".join(header + rules) + ("\n" if rules else "\n")
