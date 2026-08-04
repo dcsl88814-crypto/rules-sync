@@ -23,14 +23,26 @@ Sources: [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)
 
 - `update_rules.py`：下载规则源，转换为 `.module` 文件，并生成 `merged_direct/proxy/reject/all.module`。
 - `.github/workflows/update_rules.yml`：每天 02:00 UTC 自动更新 `rules/` 下的模块（支持手动触发）。
-- `examples/example.conf`：静态示例配置（脚本不会生成或修改它），可直接导入使用。
+- `examples/example_whitelist.conf`、`examples/example_blacklist.conf`、`examples/only_reject_list.conf`：三种预设的静态示例配置（脚本不会生成或修改它们），可直接导入使用。
 - `rules/*.module`：生成的模块文件（由 Actions 自动更新，勿手动编辑）。
 
 ## 在 Shadowrocket 中使用
 
-Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种用法：
+Shadowrocket 支持导入 `.conf` 配置和订阅 `.module` 模块。有两种用法：
 
-### 订阅链接一览
+### 方式一：导入示例配置（推荐，快速上手）
+
+提供了三种预设配置，按需选择，用 Shadowrocket 打开链接即可导入：
+
+| 配置 | 说明 | CDN 链接 | GitHub raw 链接 |
+| --- | --- | --- | --- |
+| `example_whitelist.conf` | 白名单模式：默认走代理，直连域名走直连 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/example_whitelist.conf` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/examples/example_whitelist.conf` |
+| `example_blacklist.conf` | 黑名单模式：默认直连，仅代理/拦截黑名单域名 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/example_blacklist.conf` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/examples/example_blacklist.conf` |
+| `only_reject_list.conf` | 仅拦截模式：只拦截广告/恶意域名，其余全部直连 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/only_reject_list.conf` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/examples/only_reject_list.conf` |
+
+导入后，Shadowrocket 会按 `update-url` 定时拉取最新的配置，规则则由各 `RULE-SET` 模块按需加载更新（均使用 jsDelivr CDN 链接）。
+
+### 方式二：订阅模块（按需加载，自动更新）
 
 两种域名形式，国内用户推荐使用 CDN：
 
@@ -38,6 +50,12 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 | --- | --- | --- |
 | **jsDelivr CDN** | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/<path>` | 国内可直连，推荐使用；分支缓存约 7 天，可加 `?v=日期` 强制刷新 |
 | **GitHub raw** | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/<path>` | 需要能访问 GitHub |
+
+1. 打开 Shadowrocket，进入 **配置 (Config)** 页，点击右上角 **+**，选择 **添加模块 (Add Module)**。
+2. 从下表复制模块链接（国内推荐用 jsDelivr CDN 列；若需绕过 CDN 缓存，可在 URL 末尾加 `?v=日期`）。
+3. 添加后可手动更新，或等仓库的 Actions 每天 02:00 UTC 自动更新规则后下拉刷新。
+
+> 提示：`merged_all.module` 包含全部规则（直连/代理/拦截去重合并），普通用户订阅这一个即可。
 
 合并模块（按策略去重合并，订阅一个即可）：
 
@@ -63,20 +81,6 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 | `tld-not-cn.module` | PROXY | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/tld-not-cn.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/tld-not-cn.module` |
 | `telegramcidr.module` | PROXY | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/telegramcidr.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/telegramcidr.module` |
 | `cncidr.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/cncidr.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/cncidr.module` |
-
-### 方式一：订阅模块（推荐，自动更新）
-
-1. 打开 Shadowrocket，进入 **配置 (Config)** 页，点击右上角 **+**，选择 **添加模块 (Add Module)**。
-2. 从上方「订阅链接一览」表格中复制模块链接（国内推荐用 jsDelivr CDN 列；若需绕过 CDN 缓存，可在 URL 末尾加 `?v=日期`）。
-3. 添加后可手动更新，或等仓库的 Actions 每天 02:00 UTC 自动更新规则后下拉刷新。
-
-> 提示：`merged_all.module` 包含全部规则（直连/代理/拦截去重合并），普通用户订阅这一个即可。
-
-### 方式二：导入示例配置
-
-1. 下载示例配置：**CDN** `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/example.conf`，或 **GitHub raw** `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/examples/example.conf`。
-2. 把文件保存为 `example.conf`，用 Shadowrocket 打开即可导入。
-3. 导入后，Shadowrocket 会按 `update-url` 定时拉取最新的配置，规则则由各 `RULE-SET` 模块按需加载更新。`update-url` 与 `RULE-SET` 均使用上方表格中的 CDN 链接。
 
 ## License
 
