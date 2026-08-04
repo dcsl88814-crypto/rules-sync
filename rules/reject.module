@@ -1,4 +1,4 @@
-#!url=https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/reject.module
+#!url=https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/reject.module
 #!name=Reject
 #!desc=广告/拦截域名列表
 

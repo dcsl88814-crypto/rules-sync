@@ -1,4 +1,4 @@
-#!url=https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/main/rules/tld-not-cn.module
+#!url=https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/tld-not-cn.module
 #!name=TLD-Not-CN
 #!desc=非中国大陆使用的顶级域名列表
 
