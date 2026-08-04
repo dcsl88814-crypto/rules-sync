@@ -48,7 +48,21 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 | `merged_proxy.module` | 仅代理 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_proxy.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_proxy.module` |
 | `merged_reject.module` | 仅拦截 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_reject.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/merged_reject.module` |
 
-> 单文件模块（`rules/` 下的 `direct` / `proxy` / `reject` / `private` / `apple` / `icloud` / `google` / `gfw` / `tld-not-cn` / `telegramcidr` / `cncidr`）用于配置里的 `RULE-SET` 引用，把上面链接中的文件名替换即可。
+单文件模块（`rules/` 下，供配置里的 `RULE-SET` 引用）：
+
+| 模块 | 策略 | CDN 链接 | GitHub raw 链接 |
+| --- | --- | --- | --- |
+| `direct.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/direct.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/direct.module` |
+| `proxy.module` | PROXY | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/proxy.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/proxy.module` |
+| `reject.module` | REJECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/reject.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/reject.module` |
+| `private.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/private.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/private.module` |
+| `apple.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/apple.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/apple.module` |
+| `icloud.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/icloud.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/icloud.module` |
+| `google.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/google.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/google.module` |
+| `gfw.module` | PROXY | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/gfw.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/gfw.module` |
+| `tld-not-cn.module` | PROXY | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/tld-not-cn.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/tld-not-cn.module` |
+| `telegramcidr.module` | PROXY | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/telegramcidr.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/telegramcidr.module` |
+| `cncidr.module` | DIRECT | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/cncidr.module` | `https://raw.githubusercontent.com/dcsl88814-crypto/sr-rules/refs/heads/main/rules/cncidr.module` |
 
 ### 方式一：订阅模块（推荐，自动更新）
 
