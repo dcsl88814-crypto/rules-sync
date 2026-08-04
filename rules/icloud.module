@@ -2,6 +2,8 @@
 #!name=iCloud
 #!desc=iCloud 域名列表
 
+[Rule]
+
 DOMAIN,www-cdn.icloud.com.akadns.net,DIRECT
 DOMAIN-SUFFIX,applemx-icloud.com,DIRECT
 DOMAIN-SUFFIX,icloud-content.com,DIRECT

@@ -2,6 +2,8 @@
 #!name=CNCIDR
 #!desc=中国大陆 IP 地址列表
 
+[Rule]
+
 IP-CIDR,1.1.8.0/24,DIRECT
 IP-CIDR,1.2.4.0/24,DIRECT
 IP-CIDR,1.8.1.0/24,DIRECT

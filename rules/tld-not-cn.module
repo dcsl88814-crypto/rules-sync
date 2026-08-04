@@ -2,6 +2,8 @@
 #!name=TLD-Not-CN
 #!desc=非中国大陆使用的顶级域名列表
 
+[Rule]
+
 DOMAIN-SUFFIX,gov,PROXY
 DOMAIN-SUFFIX,mil,PROXY
 DOMAIN-SUFFIX,edu,PROXY

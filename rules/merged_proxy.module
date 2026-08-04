@@ -2,6 +2,8 @@
 #!name=Merged Proxy
 #!desc=合并: PROXY 规则
 
+[Rule]
+
 DOMAIN,1password.drift.click,PROXY
 DOMAIN,3dns-1.adobe.com,PROXY
 DOMAIN,3dns-2.adobe.com,PROXY

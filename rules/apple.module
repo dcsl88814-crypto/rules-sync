@@ -2,6 +2,8 @@
 #!name=Apple
 #!desc=Apple 在中国大陆可直连的域名列表
 
+[Rule]
+
 DOMAIN-SUFFIX,a1.mzstatic.com,DIRECT
 DOMAIN-SUFFIX,a2.mzstatic.com,DIRECT
 DOMAIN-SUFFIX,a3.mzstatic.com,DIRECT

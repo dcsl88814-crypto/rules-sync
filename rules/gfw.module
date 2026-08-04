@@ -2,6 +2,8 @@
 #!name=GFW
 #!desc=GFWList 域名列表
 
+[Rule]
+
 DOMAIN-SUFFIX,000webhost.com,PROXY
 DOMAIN-SUFFIX,0rz.tw,PROXY
 DOMAIN-SUFFIX,1-apple.com.tw,PROXY

@@ -2,6 +2,8 @@
 #!name=Google
 #!desc=[慎用] Google 在中国大陆可直连的域名列表
 
+[Rule]
+
 DOMAIN-SUFFIX,265.com,DIRECT
 DOMAIN-SUFFIX,2mdn-cn.net,DIRECT
 DOMAIN-SUFFIX,2mdn.net,DIRECT

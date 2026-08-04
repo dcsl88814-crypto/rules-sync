@@ -2,6 +2,8 @@
 #!name=Merged All
 #!desc=合并: 所有策略规则（去重）
 
+[Rule]
+
 DOMAIN,2mdn-cn.net,DIRECT
 DOMAIN,2mdn.net,DIRECT
 DOMAIN,a1.mzstatic.com,DIRECT

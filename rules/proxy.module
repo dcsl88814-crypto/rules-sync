@@ -2,6 +2,8 @@
 #!name=Proxy
 #!desc=代理域名列表
 
+[Rule]
+
 DOMAIN,1password.drift.click,PROXY
 DOMAIN,3dns-1.adobe.com,PROXY
 DOMAIN,3dns-2.adobe.com,PROXY

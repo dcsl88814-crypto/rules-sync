@@ -2,6 +2,8 @@
 #!name=Direct
 #!desc=直连域名列表
 
+[Rule]
+
 DOMAIN,2mdn-cn.net,DIRECT
 DOMAIN,2mdn.net,DIRECT
 DOMAIN,a1.mzstatic.com,DIRECT

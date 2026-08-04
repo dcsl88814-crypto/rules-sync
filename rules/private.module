@@ -2,6 +2,8 @@
 #!name=Private
 #!desc=私有网络专用域名列表
 
+[Rule]
+
 DOMAIN,instant.arubanetworks.com,DIRECT
 DOMAIN,setmeup.arubanetworks.com,DIRECT
 DOMAIN,asusrouter.com,DIRECT
