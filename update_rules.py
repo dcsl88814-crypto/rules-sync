@@ -7,7 +7,6 @@ write per-source <name>.module (with #! headers), plus merged_direct/proxy/rejec
 This version DOES NOT generate example.conf or any raw_ files.
 """
 from pathlib import Path
-from datetime import datetime
 import os
 import re
 import requests
@@ -100,7 +99,7 @@ def convert_line(line: str, default_policy: str):
     if m2:
         host = m2.group(1)
         path = m2.group(2) or ""
-        pattern = re.escape(host + path) + ".*"
+        pattern = "^" + re.escape(host + path) + ".*"
         return [f"URL-REGEX,{pattern},{default_policy}"]
     if CIDR_RE.match(line):
         return [f"IP-CIDR,{line},{default_policy}"]

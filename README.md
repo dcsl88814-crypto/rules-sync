@@ -23,7 +23,7 @@ Sources: [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)
 
 - `update_rules.py`：下载规则源，转换为 `.module` 文件，并生成 `merged_direct/proxy/reject/all.module`。
 - `.github/workflows/update_rules.yml`：每天 02:00 UTC 自动更新 `rules/` 下的模块（支持手动触发）。
-- `examples/example.conf`：静态示例配置（脚本不会生成或修改它）。使用前请把 `<OWNER>` / `<REPO>` / `<BRANCH>` 替换为你的实际值。
+- `examples/example.conf`：静态示例配置（脚本不会生成或修改它），可直接导入使用。
 - `rules/*.module`：生成的模块文件（由 Actions 自动更新，勿手动编辑）。
 
 ## 在 Shadowrocket 中使用
@@ -46,7 +46,7 @@ Shadowrocket 支持订阅 `.module` 模块和导入 `.conf` 配置。有两种�
 
 1. 打开 `examples/example.conf`。
 2. 把文件保存为 `example.conf`，用 Shadowrocket 打开即可导入。
-3. 导入后，Shadowrocket 会按 `update-url` 定时拉取最新的 `merged_all.module` 模块。
+3. 导入后，Shadowrocket 会按 `update-url` 定时拉取最新的配置，规则则由各 `RULE-SET` 模块按需加载更新。
 
 ### 示例配置
 
