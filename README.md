@@ -4,7 +4,7 @@ Shadowrocket / Surge 规则模块管理仓库。自动从 [Loyalsoldier/surge-ru
 
 ## 规则来源与致谢
 
-所有规则数据均来自 **Loyalsoldier** 的 [surge-rules](https://github.com/Loyalsoldier/surge-rules) 项目（MIT License），感谢他长期维护高质量规则集。本仓库只负责抓取、转换与自动更新，规则内容的所有权与版权归原作者所有。
+所有规则数据均来自 **Loyalsoldier** 的 [surge-rules](https://github.com/Loyalsoldier/surge-rules) 项目（GPL-3.0 License），感谢他长期维护高质量规则集。本仓库只负责抓取、转换与自动更新，规则内容的所有权与版权归原作者所有。
 
 Sources: [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)
 
@@ -123,4 +123,4 @@ FINAL,PROXY
 
 Copyright (c) 2026 vycsl-dev
 
-> 注意：本项目仅转换/聚合上游规则。上游规则数据版权归 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)（MIT License）所有。
+> 注意：本项目仅转换/聚合上游规则。上游规则数据版权归 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)（GPL-3.0 License）所有。
