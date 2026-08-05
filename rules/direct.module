@@ -545,6 +545,8 @@ DOMAIN,time.amazonaws.cn,DIRECT
 DOMAIN,time.izatcloud.net,DIRECT
 DOMAIN,time.xtracloud.net,DIRECT
 DOMAIN,tj-pod1-smp-device.apple.com,DIRECT
+DOMAIN,tj-pod2-smp-device.apple.com,DIRECT
+DOMAIN,tj-pod3-smp-device.apple.com,DIRECT
 DOMAIN,tools.google.com,DIRECT
 DOMAIN,tp.louisvuitton.com,DIRECT
 DOMAIN,universal-activity-service.itunes.apple.com,DIRECT
