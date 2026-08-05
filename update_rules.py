@@ -4,12 +4,34 @@
 Download Surge rulesets, convert to Surge/Shadowrocket-compatible rules,
 write per-source <name>.module (with #! headers), plus merged_direct/proxy/reject/all.module.
 
-This version DOES NOT generate example.conf or any raw_ files.
+Features:
+- Concurrent downloads with ThreadPoolExecutor
+- Automatic retry on transient network failures
+- Structured logging with timestamps
 """
-from pathlib import Path
+from __future__ import annotations
+
+import logging
 import os
 import re
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+log = logging.getLogger(__name__)
 
 SOURCES = {
     "direct.txt": "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/direct.txt",
@@ -64,8 +86,8 @@ ADBLOCK_EXACT = re.compile(r'^\|?(https?://[^\/\s]+)(/.*)?$')
 SCHEME_RE = re.compile(r'^[a-zA-Z0-9+\-.]+://')
 
 def normalize_text(text: str) -> str:
-    if text.startswith("\ufeff"):
-        text = text.lstrip("\ufeff")
+    """Normalize line endings, strip BOM, and remove trailing blank lines."""
+    text = text.removeprefix("\ufeff")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     lines = [ln.rstrip() for ln in text.split("\n")]
     while lines and lines[-1] == "":
@@ -119,10 +141,30 @@ def convert_line(line: str, default_policy: str):
         return [f"DOMAIN-SUFFIX,{cleaned},{default_policy}"]
     return []
 
-def fetch_text(url: str) -> str:
-    print(f"Fetching {url} ...")
-    r = requests.get(url, timeout=30)
+def _build_session() -> requests.Session:
+    """Create a requests Session with retry logic."""
+    retry_strategy = Retry(
+        total=3,
+        backoff_factor=2,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"],
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session = requests.Session()
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    session.headers.update({
+        "User-Agent": "sr-rules-updater/1.0 (+https://github.com/sr-rules)",
+    })
+    return session
+
+
+def fetch_text(session: requests.Session, url: str) -> str:
+    """Download a URL with retry and return decoded text."""
+    log.info("Fetching %s ...", url)
+    r = session.get(url, timeout=(10, 30))
     r.raise_for_status()
+    r.encoding = "utf-8"
     return r.text
 
 def detect_repo_vars():
@@ -164,7 +206,7 @@ def write_module_file(name: str, url_hosted: str, friendly_name: str, desc: str,
     ]
     content = "\n".join(header + rules) + ("\n" if rules else "\n")
     module_path.write_text(content, encoding="utf-8")
-    print(f"Saved module: {module_path} ({len(rules)} rules)")
+    log.info("Saved %s (%d rules)", module_path, len(rules))
     return module_path
 
 def classify_policy(policy: str) -> str:
@@ -177,58 +219,114 @@ def classify_policy(policy: str) -> str:
         return "REJECT"
     return "OTHER"
 
-def main():
+def main() -> None:
     owner, repo, branch = detect_repo_vars()
-    print(f"Using OWNER={owner} REPO={repo} BRANCH={branch}")
+    log.info("OWNER=%s REPO=%s BRANCH=%s", owner, repo, branch)
 
-    merged_all = []
-    merged_sets = set()
-    groups = {"DIRECT": [], "PROXY": [], "REJECT": [], "OTHER": []}
-    group_sets = {k:set() for k in groups.keys()}
+    session = _build_session()
+    all_results: dict[str, tuple[list[str], str | None]] = {}  # name -> (rules, error_message)
 
-    for name, url in SOURCES.items():
+    # ------------------------------------------------------------------
+    # Phase 1: concurrent download & conversion
+    # ------------------------------------------------------------------
+    def _fetch_and_convert(name: str, url: str) -> tuple[str, list[str], str | None]:
+        """Worker: download one source and convert. Returns (name, rules, error)."""
         default_policy = DEFAULT_POLICY.get(name, "DIRECT")
         try:
-            raw_text = fetch_text(url)
-        except Exception as e:
-            print(f"Failed to fetch {url}: {e}")
-            continue
-        raw_text = normalize_text(raw_text)
+            raw_text = fetch_text(session, url)
+        except Exception as exc:
+            log.warning("Failed to fetch %s: %s", name, exc)
+            return (name, [], str(exc))
 
-        rules = []
-        seen = set()
+        raw_text = normalize_text(raw_text)
+        rules: list[str] = []
+        seen: set[str] = set()
         for ln in raw_text.splitlines():
             try:
                 conv = convert_line(ln, default_policy)
-            except Exception as e:
-                print(f"convert error for line {ln!r}: {e}")
+            except Exception as exc:
+                log.debug("Convert error in %s for line %r: %s", name, ln, exc)
                 conv = []
             for c in conv:
-                cnorm = re.sub(r'\s*,\s*', ',', c).strip()
+                cnorm = re.sub(r"\s*,\s*", ",", c).strip()
                 if cnorm not in seen:
                     seen.add(cnorm)
                     rules.append(cnorm)
-                    if cnorm not in merged_sets:
-                        merged_sets.add(cnorm)
-                        merged_all.append(cnorm)
-                    parts = cnorm.rsplit(",", 1)
-                    policy = parts[-1] if len(parts) > 1 else ""
-                    cls = classify_policy(policy)
-                    if cnorm not in group_sets[cls]:
-                        group_sets[cls].add(cnorm)
-                        groups[cls].append(cnorm)
+        return (name, rules, None)
 
-        hosted_url = f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/rules/{name.replace('.txt','.module')}"
+    max_workers = min(8, len(SOURCES))
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {
+            executor.submit(_fetch_and_convert, name, url): name
+            for name, url in SOURCES.items()
+        }
+        for future in as_completed(futures):
+            name, rules, err = future.result()
+            all_results[name] = (rules, err)
+
+    # ------------------------------------------------------------------
+    # Phase 2: merge & classify (single-threaded, deterministic order)
+    # ------------------------------------------------------------------
+    merged_all: list[str] = []
+    merged_set: set[str] = set()
+    groups: dict[str, list[str]] = {"DIRECT": [], "PROXY": [], "REJECT": [], "OTHER": []}
+    group_sets: dict[str, set[str]] = {k: set() for k in groups}
+
+    for name in SOURCES:  # preserve deterministic order
+        rules, err = all_results.get(name, ([], "not processed"))
+        if err:
+            log.warning("Skipping %s due to fetch error: %s", name, err)
+            continue
+        for cnorm in rules:
+            if cnorm not in merged_set:
+                merged_set.add(cnorm)
+                merged_all.append(cnorm)
+            parts = cnorm.rsplit(",", 1)
+            policy = parts[-1] if len(parts) > 1 else ""
+            cls = classify_policy(policy)
+            if cnorm not in group_sets[cls]:
+                group_sets[cls].add(cnorm)
+                groups[cls].append(cnorm)
+
+        hosted_url = (
+            f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}"
+            f"/rules/{name.replace('.txt', '.module')}"
+        )
         friendly_name, desc = META.get(name, (name, ""))
         write_module_file(name, hosted_url, friendly_name, desc, rules)
 
+    # ------------------------------------------------------------------
+    # Phase 3: write merged modules
+    # ------------------------------------------------------------------
     base = f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/rules"
     write_module_file("merged_direct.txt", f"{base}/merged_direct.module", "Merged Direct", "合并: DIRECT 规则", groups["DIRECT"])
-    write_module_file("merged_proxy.txt",  f"{base}/merged_proxy.module",  "Merged Proxy",  "合并: PROXY 规则", groups["PROXY"])
+    write_module_file("merged_proxy.txt", f"{base}/merged_proxy.module", "Merged Proxy", "合并: PROXY 规则", groups["PROXY"])
     write_module_file("merged_reject.txt", f"{base}/merged_reject.module", "Merged Reject", "合并: REJECT 规则", groups["REJECT"])
-    write_module_file("merged_all.txt",    f"{base}/merged_all.module",    "Merged All",    "合并: 所有策略规则（去重）", merged_all)
+    write_module_file("merged_all.txt", f"{base}/merged_all.module", "Merged All", "合并: 所有策略规则（去重）", merged_all)
 
-    print("Done.")
+    # ------------------------------------------------------------------
+    # Summary
+    # ------------------------------------------------------------------
+    total_rules = sum(
+        len(rules) for rules, err in all_results.values() if err is None
+    )
+    log.info(
+        "Done. %d sources processed, %d total rules (pre-merge), %d unique merged.",
+        sum(1 for _, err in all_results.values() if err is None),
+        total_rules,
+        len(merged_all),
+    )
 
 if __name__ == "__main__":
-    main()
+    start = time.monotonic()
+    try:
+        main()
+    except KeyboardInterrupt:
+        log.warning("Interrupted by user")
+        sys.exit(130)
+    except Exception:
+        log.exception("Fatal error")
+        sys.exit(1)
+    else:
+        elapsed = time.monotonic() - start
+        log.info("Total elapsed: %.1fs", elapsed)
