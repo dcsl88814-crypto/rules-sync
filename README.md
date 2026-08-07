@@ -55,26 +55,12 @@ https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/only_reject_
 
 | 模块 | 策略 | 订阅链接 |
 |------|------|---------|
-| `merged_all` | 全部（直连+代理+拦截） | 见下方代码块 |
-| `merged_direct` | 仅直连 | 见下方代码块 |
-| `merged_proxy` | 仅代理 | 见下方代码块 |
-| `merged_reject` | 仅拦截 | 见下方代码块 |
+| `merged_all` | 全部（直连 + 代理 + 拦截），去重合并（推荐大多数用户） | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module` |
+| `merged_direct` | 仅直连 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_direct.module` |
+| `merged_proxy` | 仅代理 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_proxy.module` |
+| `merged_reject` | 仅拦截（广告/恶意域名） | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_reject.module` |
 
-```
-# merged_all — 包含全部规则（推荐大多数用户）
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module
-
-# merged_direct — 直连规则
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_direct.module
-
-# merged_proxy — 代理规则
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_proxy.module
-
-# merged_reject — 广告拦截规则
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_reject.module
-```
-
-#### 单文件模块（供 `.conf` 中 `RULE-SET` 引用）
+#### 单源模块（供 `.conf` 中 `RULE-SET` 引用）
 
 ```
 # DIRECT
@@ -106,7 +92,7 @@ https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/reject.module
 | 上游格式示例 | 转换后 | 类型 |
 |-------------|--------|------|
 | `\|\|example.com^` | `DOMAIN-SUFFIX,example.com,POLICY` | 域名通配 |
-| `\|http://example.com/path` | `URL-REGEX,^http://example\\.com/path.*,POLICY` | 完整 URL |
+| `\|http://example.com/path` | `URL-REGEX,^http://example\.com/path.*,POLICY` | 完整 URL |
 | `1.2.3.4/24` | `IP-CIDR,1.2.3.4/24,POLICY` | IP 段 |
 | 含 `*` 的域名 | `DOMAIN-KEYWORD,xxx,POLICY` | 关键词 |
 
