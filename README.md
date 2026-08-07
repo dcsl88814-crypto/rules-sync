@@ -53,31 +53,83 @@ https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/only_reject_
 
 #### 合并模块（订阅一个即可）
 
-| 模块 | 策略 | 订阅链接 |
-|------|------|---------|
-| `merged_all` | 全部（直连 + 代理 + 拦截），去重合并（推荐大多数用户） | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module` |
-| `merged_direct` | 仅直连 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_direct.module` |
-| `merged_proxy` | 仅代理 | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_proxy.module` |
-| `merged_reject` | 仅拦截（广告/恶意域名） | `https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_reject.module` |
+> 每个模块一行，点代码块右上角「复制」即可单独复制该 URL。
 
-#### 单源模块（供 `.conf` 中 `RULE-SET` 引用）
+**merged_all — 包含全部规则（推荐大多数用户）**
 
 ```
-# DIRECT
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module
+```
+
+**merged_direct — 仅直连**
+
+```
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_direct.module
+```
+
+**merged_proxy — 仅代理**
+
+```
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_proxy.module
+```
+
+**merged_reject — 仅拦截**
+
+```
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_reject.module
+```
+
+#### 单文件模块（供 `.conf` 中 `RULE-SET` 引用）
+
+> 每个模块一行，点代码块右上角「复制」即可单独复制该 URL。
+
+**DIRECT**
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/direct.module
+```
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/private.module
+```
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/apple.module
+```
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/icloud.module
+```
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/google.module
+```
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/cncidr.module
+```
 
-# PROXY
+**PROXY**
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/proxy.module
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/gfw.module
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/tld-not-cn.module
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/telegramcidr.module
+```
 
-# REJECT
+```
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/gfw.module
+```
+
+```
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/tld-not-cn.module
+```
+
+```
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/telegramcidr.module
+```
+
+**REJECT**
+
+```
 https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/reject.module
 ```
 
@@ -92,7 +144,7 @@ https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/reject.module
 | 上游格式示例 | 转换后 | 类型 |
 |-------------|--------|------|
 | `\|\|example.com^` | `DOMAIN-SUFFIX,example.com,POLICY` | 域名通配 |
-| `\|http://example.com/path` | `URL-REGEX,^http://example\.com/path.*,POLICY` | 完整 URL |
+| `\|http://example.com/path` | `URL-REGEX,^http://example\\.com/path.*,POLICY` | 完整 URL |
 | `1.2.3.4/24` | `IP-CIDR,1.2.3.4/24,POLICY` | IP 段 |
 | 含 `*` 的域名 | `DOMAIN-KEYWORD,xxx,POLICY` | 关键词 |
 
