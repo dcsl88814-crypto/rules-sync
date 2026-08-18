@@ -194,10 +194,9 @@ def detect_repo_vars():
         branch = "main"
     return owner, repo, branch
 
-def write_module_file(name: str, url_hosted: str, friendly_name: str, desc: str, rules: list):
+def write_module_file(name: str, friendly_name: str, desc: str, rules: list):
     module_path = OUT_DIR / (name.replace(".txt", ".module"))
     header = [
-        f"#!url={url_hosted}",
         f"#!name={friendly_name}",
         f"#!desc={desc}",
         "",
@@ -288,21 +287,16 @@ def main() -> None:
                 group_sets[cls].add(cnorm)
                 groups[cls].append(cnorm)
 
-        hosted_url = (
-            f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}"
-            f"/rules/{name.replace('.txt', '.module')}"
-        )
         friendly_name, desc = META.get(name, (name, ""))
-        write_module_file(name, hosted_url, friendly_name, desc, rules)
+        write_module_file(name, friendly_name, desc, rules)
 
     # ------------------------------------------------------------------
     # Phase 3: write merged modules
     # ------------------------------------------------------------------
-    base = f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/rules"
-    write_module_file("merged_direct.txt", f"{base}/merged_direct.module", "Merged Direct", "合并: DIRECT 规则", groups["DIRECT"])
-    write_module_file("merged_proxy.txt", f"{base}/merged_proxy.module", "Merged Proxy", "合并: PROXY 规则", groups["PROXY"])
-    write_module_file("merged_reject.txt", f"{base}/merged_reject.module", "Merged Reject", "合并: REJECT 规则", groups["REJECT"])
-    write_module_file("merged_all.txt", f"{base}/merged_all.module", "Merged All", "合并: 所有策略规则（去重）", merged_all)
+    write_module_file("merged_direct.txt", "Merged Direct", "合并: DIRECT 规则", groups["DIRECT"])
+    write_module_file("merged_proxy.txt", "Merged Proxy", "合并: PROXY 规则", groups["PROXY"])
+    write_module_file("merged_reject.txt", "Merged Reject", "合并: REJECT 规则", groups["REJECT"])
+    write_module_file("merged_all.txt", "Merged All", "合并: 所有策略规则（去重）", merged_all)
 
     # ------------------------------------------------------------------
     # Summary

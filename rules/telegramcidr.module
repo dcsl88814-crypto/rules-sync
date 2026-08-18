@@ -1,4 +1,3 @@
-#!url=https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/rules/telegramcidr.module
 #!name=TelegramCIDR
 #!desc=Telegram 使用的 IP 地址列表
 
