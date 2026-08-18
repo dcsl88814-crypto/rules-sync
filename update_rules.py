@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Download Surge rulesets from Loyalsoldier/surge-rules, then generate:
-
-  * Shadowrocket: per-source <name>.module (with #! headers), plus
-    merged_direct/proxy/reject/all.module
-  * sing-box:     per-source <name>.json (source rule-set format) and
-    <name>.srs (binary rule-set, compiled with the official sing-box CLI:
-    `sing-box rule-set compile <name>.json -o <name>.srs`)
+Download Surge rulesets, convert to Surge/Shadowrocket-compatible rules,
+write per-source <name>.module (with #! headers), plus merged_direct/proxy/reject/all.module.
 
 Features:
 - Concurrent downloads with ThreadPoolExecutor
@@ -16,12 +11,9 @@ Features:
 """
 from __future__ import annotations
 
-import json
 import logging
 import os
 import re
-import shutil
-import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -227,88 +219,6 @@ def classify_policy(policy: str) -> str:
         return "REJECT"
     return "OTHER"
 
-# ---------------------------------------------------------------------------
-# sing-box rule-set generation
-#
-# JSON source format (https://sing-box.sagernet.org/configuration/rule-set/source-format/):
-#   {"version": 1, "rules": [{"domain": [...]}, {"domain_suffix": [...]}, ...]}
-# Note: multiple fields inside ONE headless rule are ANDed, so each matcher
-# type must live in its own rule object. The binary .srs is produced by the
-# official CLI, not hand-rolled, because the domain matcher uses a succinct
-# set that is impractical to reimplement.
-# ---------------------------------------------------------------------------
-SINGBOX_RULESET_VERSION = 1
-
-def build_singbox_ruleset(rules: list) -> dict:
-    """Group converted module rule strings into sing-box headless rules."""
-    categories = {
-        "domain": [],
-        "domain_suffix": [],
-        "domain_keyword": [],
-        "domain_regex": [],
-        "ip_cidr": [],
-    }
-    seen = {key: set() for key in categories}
-    for line in rules:
-        parts = line.split(",")
-        if len(parts) < 2:
-            continue
-        rule_type = parts[0].strip().upper()
-        value = parts[1].strip()
-        if not value:
-            continue
-        if rule_type == "DOMAIN":
-            key = "domain"
-        elif rule_type == "DOMAIN-SUFFIX":
-            key = "domain_suffix"
-        elif rule_type == "DOMAIN-KEYWORD":
-            key = "domain_keyword"
-        elif rule_type == "URL-REGEX":
-            # Best effort: sing-box domain_regex only matches the domain part.
-            key = "domain_regex"
-        elif rule_type in ("IP-CIDR", "IP-CIDR6"):
-            key = "ip_cidr"
-        else:
-            continue
-        if value not in seen[key]:
-            seen[key].add(value)
-            categories[key].append(value)
-    ruleset = {
-        "version": SINGBOX_RULESET_VERSION,
-        "rules": [{key: values} for key, values in categories.items() if values],
-    }
-    return ruleset
-
-def write_singbox_files(name: str, rules: list, out_dir: Path):
-    """Write <name>.json rule-set and compile <name>.srs with sing-box CLI."""
-    json_path = out_dir / name.replace(".txt", ".json")
-    srs_path = out_dir / name.replace(".txt", ".srs")
-    data = build_singbox_ruleset(rules)
-    json_path.write_text(
-        json.dumps(data, ensure_ascii=False, separators=(",", ":")),
-        encoding="utf-8",
-    )
-    count = sum(len(values) for rule in data["rules"] for values in rule.values())
-    log.info("Saved %s (%d sing-box rules)", json_path, count)
-
-    singbox_bin = shutil.which("sing-box")
-    if not singbox_bin:
-        log.warning(
-            "sing-box binary not found in PATH, skipping %s (install it to "
-            "enable SRS compilation, see .github/workflows/update_rules.yml)",
-            srs_path,
-        )
-        return
-    result = subprocess.run(
-        [singbox_bin, "rule-set", "compile", str(json_path), "-o", str(srs_path)],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
-        log.error("sing-box compile failed for %s: %s", srs_path, result.stderr.strip())
-        return
-    log.info("Saved %s (%d bytes)", srs_path, srs_path.stat().st_size)
-
 def main() -> None:
     owner, repo, branch = detect_repo_vars()
     log.info("OWNER=%s REPO=%s BRANCH=%s", owner, repo, branch)
@@ -385,9 +295,6 @@ def main() -> None:
         friendly_name, desc = META.get(name, (name, ""))
         write_module_file(name, hosted_url, friendly_name, desc, rules)
 
-        # sing-box rule sets (json + compiled srs)
-        write_singbox_files(name, rules, OUT_DIR)
-
     # ------------------------------------------------------------------
     # Phase 3: write merged modules
     # ------------------------------------------------------------------
@@ -403,14 +310,11 @@ def main() -> None:
     total_rules = sum(
         len(rules) for rules, err in all_results.values() if err is None
     )
-    srs_count = len(list(OUT_DIR.glob("*.srs")))
     log.info(
-        "Done. %d sources processed, %d total rules (pre-merge), %d unique merged, "
-        "%d sing-box .srs rule sets.",
+        "Done. %d sources processed, %d total rules (pre-merge), %d unique merged.",
         sum(1 for _, err in all_results.values() if err is None),
         total_rules,
         len(merged_all),
-        srs_count,
     )
 
 if __name__ == "__main__":

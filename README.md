@@ -1,72 +1,51 @@
-# sr-rules
+# rules-sync
 
 [![Update Rules](https://github.com/dcsl88814-crypto/sr-rules/actions/workflows/update_rules.yml/badge.svg)](https://github.com/dcsl88814-crypto/sr-rules/actions/workflows/update_rules.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
-> 每日自动将 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules) 的规则转换为 **sing-box**（`.srs`）和 **Shadowrocket**（`.module`）可订阅格式。规则内容完全来自上游，本项目只做格式转换。
+> 每日自动将 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules) 的规则转换为 **Shadowrocket** 可订阅的 `.module` 模块。规则内容完全来自上游，本项目只做格式转换。
+
+> 使用 sing-box？请切换到 [srs 分支](https://github.com/dcsl88814-crypto/sr-rules/tree/srs)。
 
 ---
 
-## 规则集
+## 规则模块
 
-| 文件 | 内容 | 建议策略 |
-|------|------|---------|
-| `direct` | 直连域名 | 直连 |
-| `proxy` | 代理域名 | 代理 |
-| `reject` | 广告 / 恶意域名 | 拦截 |
-| `gfw` | GFWList 域名 | 代理 |
-| `tld-not-cn` | 非中国大陆顶级域名 | 代理 |
-| `cncidr` | 中国大陆 IP | 直连 |
-| `telegramcidr` | Telegram IP | 代理 |
-| `private` | 私有网络域名 | 直连 |
-| `apple` | Apple 可直连域名 | 直连 |
-| `icloud` | iCloud 域名 | 直连 |
-| `google` | Google 可直连域名（慎用） | 直连 |
+| 模块 | 内容 | 策略 |
+|------|------|------|
+| `direct` | 直连域名 | DIRECT |
+| `proxy` | 代理域名 | PROXY |
+| `reject` | 广告 / 恶意域名 | REJECT |
+| `gfw` | GFWList 域名 | PROXY |
+| `tld-not-cn` | 非中国大陆顶级域名 | PROXY |
+| `cncidr` | 中国大陆 IP | DIRECT |
+| `telegramcidr` | Telegram IP | PROXY |
+| `private` | 私有网络域名 | DIRECT |
+| `apple` | Apple 可直连域名 | DIRECT |
+| `icloud` | iCloud 域名 | DIRECT |
+| `google` | Google 可直连域名（慎用） | DIRECT |
 
-每个规则集同时提供 `.srs` 和 `.module` 两种格式：
+模块地址：
 
 ```
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/<name>.<srs|module>
-```
-
----
-
-## sing-box 使用
-
-在配置的 `route.rule_set` 中引用（URL 以 `.srs` 结尾时自动识别为二进制格式，`format` 可省略）：
-
-```json
-{
-  "route": {
-    "rule_set": [
-      { "type": "remote", "tag": "reject", "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/reject.srs", "update_interval": "1d" },
-      { "type": "remote", "tag": "direct", "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/direct.srs", "update_interval": "1d" },
-      { "type": "remote", "tag": "proxy",  "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/proxy.srs",  "update_interval": "1d" }
-    ],
-    "rules": [
-      { "rule_set": ["reject"], "action": "reject" },
-      { "rule_set": ["direct"], "outbound": "direct" },
-      { "rule_set": ["proxy", "gfw", "tld-not-cn"], "outbound": "proxy" }
-    ]
-  }
-}
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/rules/<name>.module
 ```
 
 ---
 
-## Shadowrocket 使用
+## 使用
 
-直接添加模块（合并模块，订阅一个即可）：
+**直接添加合并模块**（订阅一个即可，含全部策略规则）：
 
 ```
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/rules/merged_all.module
 ```
 
-或导入预设配置模板：
+**或导入预设配置模板**：
 
-- 白名单：[example_whitelist.conf](https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/example_whitelist.conf)
-- 黑名单：[example_blacklist.conf](https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/example_blacklist.conf)
-- 仅拦截：[only_reject_list.conf](https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/examples/only_reject_list.conf)
+- 白名单：[example_whitelist.conf](https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/examples/example_whitelist.conf)
+- 黑名单：[example_blacklist.conf](https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/examples/example_blacklist.conf)
+- 仅拦截：[only_reject_list.conf](https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/examples/only_reject_list.conf)
 
 ---
 
@@ -76,8 +55,8 @@ GitHub Actions 每日 02:00 UTC 自动拉取上游规则并重新生成；也可
 
 ## 部署到自己的仓库
 
-1. Fork 本仓库并启用 Actions
-2. 全局替换 `dcsl88814-crypto` 为你的 GitHub 用户名（涉及 `README.md` 和 `examples/*.conf`）
+1. Fork 本仓库的 `module` 分支并启用 Actions
+2. 全局替换 `dcsl88814-crypto` 为你的 GitHub 用户名（涉及 `README.md` 和 `examples/*.conf`）；若 GitHub 仓库已改名为 `rules-sync`，同时替换 URL 中的 `sr-rules`
 
 ## License
 

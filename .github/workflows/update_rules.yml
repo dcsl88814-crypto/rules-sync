@@ -1,4 +1,4 @@
-name: Update Rules (Shadowrocket + sing-box)
+name: Update Shadowrocket Modules
 
 on:
   schedule:
@@ -35,14 +35,6 @@ jobs:
 
       - name: Install deps
         run: pip install requests urllib3
-
-      - name: Install sing-box (for .srs compilation)
-        run: |
-          VER=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | python3 -c "import sys,json;print(json.load(sys.stdin)['tag_name'].lstrip('v'))")
-          curl -sL "https://github.com/SagerNet/sing-box/releases/download/v${VER}/sing-box-${VER}-linux-amd64.tar.gz" -o /tmp/sing-box.tar.gz
-          tar -xzf /tmp/sing-box.tar.gz -C /tmp
-          sudo cp "/tmp/sing-box-${VER}-linux-amd64/sing-box" /usr/local/bin/
-          sing-box version
 
       - name: Run update script
         id: update
