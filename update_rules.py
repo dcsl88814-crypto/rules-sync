@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Download Surge rulesets from Loyalsoldier/surge-rules, then generate:
-
-  * Shadowrocket: per-source <name>.module (with #! headers), plus
-    merged_direct/proxy/reject/all.module
-  * sing-box:     per-source <name>.json (source rule-set format) and
-    <name>.srs (binary rule-set, compiled with the official sing-box CLI:
+Download Surge rulesets from Loyalsoldier/surge-rules, generate sing-box rule sets:
+  * rules/<name>.json  (source rule-set format)
+  * rules/<name>.srs   (binary rule-set, compiled with the official sing-box CLI:
     `sing-box rule-set compile <name>.json -o <name>.srs`)
 
 Features:
@@ -67,20 +64,6 @@ DEFAULT_POLICY = {
     "tld-not-cn.txt": "PROXY",
     "telegramcidr.txt":"PROXY",
     "cncidr.txt": "DIRECT",
-}
-
-META = {
-    "direct.txt": ("Direct", "直连域名列表"),
-    "proxy.txt": ("Proxy", "代理域名列表"),
-    "reject.txt": ("Reject", "广告/拦截域名列表"),
-    "private.txt":("Private", "私有网络专用域名列表"),
-    "apple.txt": ("Apple", "Apple 在中国大陆可直连的域名列表"),
-    "icloud.txt":("iCloud", "iCloud 域名列表"),
-    "google.txt":("Google", "[慎用] Google 在中国大陆可直连的域名列表"),
-    "gfw.txt": ("GFW", "GFWList 域名列表"),
-    "tld-not-cn.txt":("TLD-Not-CN", "非中国大陆使用的顶级域名列表"),
-    "telegramcidr.txt":("TelegramCIDR", "Telegram 使用的 IP 地址列表"),
-    "cncidr.txt": ("CNCIDR", "中国大陆 IP 地址列表"),
 }
 
 OUT_DIR = Path("rules")
@@ -201,31 +184,6 @@ def detect_repo_vars():
     if not branch:
         branch = "main"
     return owner, repo, branch
-
-def write_module_file(name: str, url_hosted: str, friendly_name: str, desc: str, rules: list):
-    module_path = OUT_DIR / (name.replace(".txt", ".module"))
-    header = [
-        f"#!url={url_hosted}",
-        f"#!name={friendly_name}",
-        f"#!desc={desc}",
-        "",
-        "[Rule]",
-        ""
-    ]
-    content = "\n".join(header + rules) + ("\n" if rules else "\n")
-    module_path.write_text(content, encoding="utf-8")
-    log.info("Saved %s (%d rules)", module_path, len(rules))
-    return module_path
-
-def classify_policy(policy: str) -> str:
-    p = policy.strip().upper()
-    if p.startswith("DIRECT"):
-        return "DIRECT"
-    if p.startswith("PROXY"):
-        return "PROXY"
-    if p.startswith("REJECT"):
-        return "REJECT"
-    return "OTHER"
 
 # ---------------------------------------------------------------------------
 # sing-box rule-set generation
@@ -355,47 +313,14 @@ def main() -> None:
             all_results[name] = (rules, err)
 
     # ------------------------------------------------------------------
-    # Phase 2: merge & classify (single-threaded, deterministic order)
+    # Phase 2: write sing-box rule sets (deterministic order)
     # ------------------------------------------------------------------
-    merged_all: list[str] = []
-    merged_set: set[str] = set()
-    groups: dict[str, list[str]] = {"DIRECT": [], "PROXY": [], "REJECT": [], "OTHER": []}
-    group_sets: dict[str, set[str]] = {k: set() for k in groups}
-
     for name in SOURCES:  # preserve deterministic order
         rules, err = all_results.get(name, ([], "not processed"))
         if err:
             log.warning("Skipping %s due to fetch error: %s", name, err)
             continue
-        for cnorm in rules:
-            if cnorm not in merged_set:
-                merged_set.add(cnorm)
-                merged_all.append(cnorm)
-            parts = cnorm.rsplit(",", 1)
-            policy = parts[-1] if len(parts) > 1 else ""
-            cls = classify_policy(policy)
-            if cnorm not in group_sets[cls]:
-                group_sets[cls].add(cnorm)
-                groups[cls].append(cnorm)
-
-        hosted_url = (
-            f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}"
-            f"/rules/{name.replace('.txt', '.module')}"
-        )
-        friendly_name, desc = META.get(name, (name, ""))
-        write_module_file(name, hosted_url, friendly_name, desc, rules)
-
-        # sing-box rule sets (json + compiled srs)
         write_singbox_files(name, rules, OUT_DIR)
-
-    # ------------------------------------------------------------------
-    # Phase 3: write merged modules
-    # ------------------------------------------------------------------
-    base = f"https://cdn.jsdelivr.net/gh/{owner}/{repo}@{branch}/rules"
-    write_module_file("merged_direct.txt", f"{base}/merged_direct.module", "Merged Direct", "合并: DIRECT 规则", groups["DIRECT"])
-    write_module_file("merged_proxy.txt", f"{base}/merged_proxy.module", "Merged Proxy", "合并: PROXY 规则", groups["PROXY"])
-    write_module_file("merged_reject.txt", f"{base}/merged_reject.module", "Merged Reject", "合并: REJECT 规则", groups["REJECT"])
-    write_module_file("merged_all.txt", f"{base}/merged_all.module", "Merged All", "合并: 所有策略规则（去重）", merged_all)
 
     # ------------------------------------------------------------------
     # Summary
@@ -405,11 +330,9 @@ def main() -> None:
     )
     srs_count = len(list(OUT_DIR.glob("*.srs")))
     log.info(
-        "Done. %d sources processed, %d total rules (pre-merge), %d unique merged, "
-        "%d sing-box .srs rule sets.",
+        "Done. %d sources processed, %d total rules, %d sing-box .srs rule sets.",
         sum(1 for _, err in all_results.values() if err is None),
         total_rules,
-        len(merged_all),
         srs_count,
     )
 

@@ -1,4 +1,4 @@
-name: Update Rules (Shadowrocket + sing-box)
+name: Update sing-box Rules
 
 on:
   schedule:
