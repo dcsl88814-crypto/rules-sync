@@ -1,4 +1,4 @@
-#!url=https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/tld-not-cn.module
+#!url=https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/rules/tld-not-cn.module
 #!name=TLD-Not-CN
 #!desc=非中国大陆使用的顶级域名列表
 

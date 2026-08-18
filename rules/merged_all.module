@@ -1,4 +1,4 @@
-#!url=https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@main/rules/merged_all.module
+#!url=https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@module/rules/merged_all.module
 #!name=Merged All
 #!desc=合并: 所有策略规则（去重）
 
