@@ -18,7 +18,7 @@
 ## 部署到自己的仓库
 
 1. Fork 本仓库（保留所有分支）
-2. 在 module / srs 分支的 README 中替换 `dcsl88814-crypto` 为你的 GitHub 用户名；若仓库改名为 `rules-sync`，同时替换 URL 中的 `sr-rules`
+2. 在 module / srs 分支的 README 中替换 `dcsl88814-crypto` 为你的 GitHub 用户名
 3. 各分支的 Actions 会自动更新对应格式的规则文件
 
 ## License
