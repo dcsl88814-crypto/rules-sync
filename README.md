@@ -1,11 +1,11 @@
 # rules-sync
 
-[![Update Rules](https://github.com/dcsl88814-crypto/sr-rules/actions/workflows/update_rules.yml/badge.svg)](https://github.com/dcsl88814-crypto/sr-rules/actions/workflows/update_rules.yml)
+[![Update Rules](https://github.com/dcsl88814-crypto/rules-sync/actions/workflows/update_rules.yml/badge.svg)](https://github.com/dcsl88814-crypto/rules-sync/actions/workflows/update_rules.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 > 每日自动将 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules) 的规则转换为 **sing-box** 可订阅的 `.srs` 二进制规则集。规则内容完全来自上游，本项目只做格式转换。
 
-> 使用 Shadowrocket？请切换到 [module 分支](https://github.com/dcsl88814-crypto/sr-rules/tree/module)。
+> 使用 Shadowrocket？请切换到 [module 分支](https://github.com/dcsl88814-crypto/rules-sync/tree/module)。
 
 ---
 
@@ -28,7 +28,7 @@
 每个规则集同时提供 `.srs`（二进制，推荐）和 `.json`（源格式）两个文件：
 
 ```
-https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@srs/rules/<name>.srs
+https://cdn.jsdelivr.net/gh/dcsl88814-crypto/rules-sync@srs/rules/<name>.srs
 ```
 
 ---
@@ -41,9 +41,9 @@ https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@srs/rules/<name>.srs
 {
   "route": {
     "rule_set": [
-      { "type": "remote", "tag": "reject", "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@srs/rules/reject.srs", "update_interval": "1d" },
-      { "type": "remote", "tag": "direct", "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@srs/rules/direct.srs", "update_interval": "1d" },
-      { "type": "remote", "tag": "proxy",  "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/sr-rules@srs/rules/proxy.srs",  "update_interval": "1d" }
+      { "type": "remote", "tag": "reject", "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/rules-sync@srs/rules/reject.srs", "update_interval": "1d" },
+      { "type": "remote", "tag": "direct", "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/rules-sync@srs/rules/direct.srs", "update_interval": "1d" },
+      { "type": "remote", "tag": "proxy",  "url": "https://cdn.jsdelivr.net/gh/dcsl88814-crypto/rules-sync@srs/rules/proxy.srs",  "update_interval": "1d" }
     ],
     "rules": [
       { "rule_set": ["reject"], "action": "reject" },
@@ -63,7 +63,7 @@ GitHub Actions 每日 02:00 UTC 自动拉取上游规则，用官方 `sing-box r
 ## 部署到自己的仓库
 
 1. Fork 本仓库的 `srs` 分支并启用 Actions
-2. 若 GitHub 仓库已改名为 `rules-sync`，替换 URL 中的 `sr-rules`
+
 
 ## License
 
