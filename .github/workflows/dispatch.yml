@@ -17,12 +17,12 @@ jobs:
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H 'Accept: application/vnd.github+json' \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update_rules.yml/dispatches \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update-module.yml/dispatches \
             -d '{"ref":"module"}'
       - name: Trigger srs branch update
         run: |
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H 'Accept: application/vnd.github+json' \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update_rules.yml/dispatches \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update-srs.yml/dispatches \
             -d '{"ref":"srs"}'
