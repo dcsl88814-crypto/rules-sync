@@ -567,6 +567,7 @@ DOMAIN-SUFFIX,break.com,PROXY
 DOMAIN-SUFFIX,breakgfw.com,PROXY
 DOMAIN-SUFFIX,breakingtweets.com,PROXY
 DOMAIN-SUFFIX,breakwall.net,PROXY
+DOMAIN-SUFFIX,briarproject.org,PROXY
 DOMAIN-SUFFIX,brill.com,PROXY
 DOMAIN-SUFFIX,brizzly.com,PROXY
 DOMAIN-SUFFIX,broadpressinc.com,PROXY
@@ -709,6 +710,7 @@ DOMAIN-SUFFIX,character.ai,PROXY
 DOMAIN-SUFFIX,chat.com,PROXY
 DOMAIN-SUFFIX,chat.lmsys.org,PROXY
 DOMAIN-SUFFIX,chatgpt.com,PROXY
+DOMAIN-SUFFIX,chatgpt.site,PROXY
 DOMAIN-SUFFIX,chatpdf.com,PROXY
 DOMAIN-SUFFIX,chaturbate.com,PROXY
 DOMAIN-SUFFIX,checkgfw.com,PROXY
