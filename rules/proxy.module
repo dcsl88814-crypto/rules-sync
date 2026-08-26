@@ -1525,6 +1525,7 @@ DOMAIN-SUFFIX,adguard.info,PROXY
 DOMAIN-SUFFIX,adguard.io,PROXY
 DOMAIN-SUFFIX,adguard.org,PROXY
 DOMAIN-SUFFIX,adguardaccount.com,PROXY
+DOMAIN-SUFFIX,adguardaccount.net,PROXY
 DOMAIN-SUFFIX,adguardcdn.com,PROXY
 DOMAIN-SUFFIX,adguardvpn.com,PROXY
 DOMAIN-SUFFIX,adhelpnews.com,PROXY
@@ -2555,6 +2556,7 @@ DOMAIN-SUFFIX,aoc.cat,PROXY
 DOMAIN-SUFFIX,aodahl.com,PROXY
 DOMAIN-SUFFIX,aofriend.com,PROXY
 DOMAIN-SUFFIX,aokwholesale.net,PROXY
+DOMAIN-SUFFIX,aolcdn.com,PROXY
 DOMAIN-SUFFIX,aomedia.org,PROXY
 DOMAIN-SUFFIX,aomiwang.com,PROXY
 DOMAIN-SUFFIX,aorus.com,PROXY
@@ -18252,6 +18254,7 @@ DOMAIN-SUFFIX,ourshdtv.com,PROXY
 DOMAIN-SUFFIX,ourshemales.com,PROXY
 DOMAIN-SUFFIX,oursteps.com.au,PROXY
 DOMAIN-SUFFIX,ourtv.hk,PROXY
+DOMAIN-SUFFIX,ouryahoo.com,PROXY
 DOMAIN-SUFFIX,out-app-purchase.com,PROXY
 DOMAIN-SUFFIX,outbound.io,PROXY
 DOMAIN-SUFFIX,outdoorpublicsex.com,PROXY
@@ -26375,6 +26378,7 @@ DOMAIN-SUFFIX,yahooapis.com,PROXY
 DOMAIN-SUFFIX,yahoodns.net,PROXY
 DOMAIN-SUFFIX,yahoofinance.com,PROXY
 DOMAIN-SUFFIX,yahoohealth.com,PROXY
+DOMAIN-SUFFIX,yahooinc.com,PROXY
 DOMAIN-SUFFIX,yahoomusic.com,PROXY
 DOMAIN-SUFFIX,yahoosandbox.com,PROXY
 DOMAIN-SUFFIX,yahoosportsbook.com,PROXY
