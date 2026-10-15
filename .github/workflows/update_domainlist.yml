@@ -1,0 +1,64 @@
+name: Update domain-list Rule Sets
+
+# Compiles Loyalsoldier/domain-list-custom release lists into sing-box
+# rule sets: domainlist/<name>.json + domainlist/<name>.srs
+#
+# Commits the result straight back to this branch (no PR, no manual merge),
+# same convention as update_rules.yml.
+
+on:
+  schedule:
+    # 23:40 UTC = 07:40 Asia/Shanghai, after Loyalsoldier's own daily build
+    - cron: '40 23 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install deps
+        run: pip install requests urllib3
+
+      - name: Install sing-box (for .srs compilation)
+        run: |
+          VER=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest \
+            | python3 -c "import sys,json;print(json.load(sys.stdin)['tag_name'].lstrip('v'))")
+          curl -sL "https://github.com/SagerNet/sing-box/releases/download/v${VER}/sing-box-${VER}-linux-amd64.tar.gz" \
+            -o /tmp/sing-box.tar.gz
+          tar -xzf /tmp/sing-box.tar.gz -C /tmp
+          sudo cp "/tmp/sing-box-${VER}-linux-amd64/sing-box" /usr/local/bin/
+          sing-box version
+
+      - name: Build rule sets
+        run: python update_domainlist.py 2>&1 | tee domainlist.log
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain domainlist/)" ]; then
+            git add domainlist/
+            git commit -m "chore(domainlist): auto-update — $(date -u +'%Y-%m-%d')" \
+              -m "$(grep -oP 'Done\. \K.*' domainlist.log || echo 'rule sets updated')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
