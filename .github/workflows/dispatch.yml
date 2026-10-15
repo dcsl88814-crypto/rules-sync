@@ -26,10 +26,3 @@ jobs:
             -H 'Accept: application/vnd.github+json' \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/update_rules.yml/dispatches \
             -d '{"ref":"srs"}'
-      - name: Trigger domainlist update (srs)
-        run: |
-          curl -sf -X POST \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H 'Accept: application/vnd.github+json' \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update_domainlist.yml/dispatches \
-            -d '{"ref":"srs"}'
