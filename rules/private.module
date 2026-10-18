@@ -11,6 +11,8 @@ DOMAIN,www.asusrouter.com,DIRECT
 DOMAIN,oasisauth.h3c.com,DIRECT
 DOMAIN,routerlogin.com,DIRECT
 DOMAIN,www.routerlogin.com,DIRECT
+DOMAIN,localhost.weixin.qq.com,DIRECT
+DOMAIN,localhost.work.weixin.qq.com,DIRECT
 DOMAIN,tplogin.cn,DIRECT
 DOMAIN,miwifi.com,DIRECT
 DOMAIN,www.miwifi.com,DIRECT
