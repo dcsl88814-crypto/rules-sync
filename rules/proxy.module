@@ -144,6 +144,7 @@ DOMAIN,d2vjef5jvl6bfs.cloudfront.net,PROXY
 DOMAIN,d2xmjdvx03ij56.cloudfront.net,PROXY
 DOMAIN,d31dormfno8pk4.cloudfront.net,PROXY
 DOMAIN,d33wubrfki0l68.cloudfront.net,PROXY
+DOMAIN,d348twzf7a8p5.cloudfront.net,PROXY
 DOMAIN,d36nr0u3xmc4mm.cloudfront.net,PROXY
 DOMAIN,d3aqoihi2n8ty8.cloudfront.net,PROXY
 DOMAIN,d3c27h4odz752x.cloudfront.net,PROXY
@@ -168,6 +169,7 @@ DOMAIN,deribit.cdn.prismic.io,PROXY
 DOMAIN,deutschewelle.h-cdn.com,PROXY
 DOMAIN,developer.microsoft.com,PROXY
 DOMAIN,developers.facebook.com,PROXY
+DOMAIN,devforum-uploads.s3.dualstack.us-east-2.amazonaws.com,PROXY
 DOMAIN,dfp6rglgjqszk.cloudfront.net,PROXY
 DOMAIN,dgeft87wbj63p.cloudfront.net,PROXY
 DOMAIN,discord-attachments-uploads-prd.storage.googleapis.com,PROXY
@@ -178,6 +180,7 @@ DOMAIN,dlmobilegarena-a.akamaihd.net,PROXY
 DOMAIN,dmqdd6hw24ucf.cloudfront.net,PROXY
 DOMAIN,docker-images-prod.6aa30f8b08e16409b46e0173d6de2f56.r2.cloudflarestorage.com,PROXY
 DOMAIN,docker-pinata-support.s3.amazonaws.com,PROXY
+DOMAIN,doy2mn9upadnk.cloudfront.net,PROXY
 DOMAIN,dqd0jw5gvbchn.cloudfront.net,PROXY
 DOMAIN,dqrpb9wgowsf5.cloudfront.net,PROXY
 DOMAIN,ds-linear-abematv.akamaized.net,PROXY
@@ -225,7 +228,6 @@ DOMAIN,firebaselogging.googleapis.com,PROXY
 DOMAIN,firebaseperusertopics-pa.googleapis.com,PROXY
 DOMAIN,firebaseremoteconfig.googleapis.com,PROXY
 DOMAIN,firstsearch.oclc.org,PROXY
-DOMAIN,flightsimulator.azureedge.net,PROXY
 DOMAIN,fontshop-prod-responsive-images.s3.amazonaws.com,PROXY
 DOMAIN,foxnewsplayer-a.akamaihd.net,PROXY
 DOMAIN,gamedownloads-rockstargames-com.akamaized.net,PROXY
@@ -3129,7 +3131,6 @@ DOMAIN-SUFFIX,asminternational.org,PROXY
 DOMAIN-SUFFIX,asmr.gay,PROXY
 DOMAIN-SUFFIX,asmrbuluo.com,PROXY
 DOMAIN-SUFFIX,asn-online.org,PROXY
-DOMAIN-SUFFIX,asobostudio.com,PROXY
 DOMAIN-SUFFIX,asp-cc.com,PROXY
 DOMAIN-SUFFIX,asp.net,PROXY
 DOMAIN-SUFFIX,aspbjournals.org,PROXY
@@ -4115,8 +4116,15 @@ DOMAIN-SUFFIX,beevpn.com,PROXY
 DOMAIN-SUFFIX,beforeigners.com,PROXY
 DOMAIN-SUFFIX,befuck.com,PROXY
 DOMAIN-SUFFIX,befuck.net,PROXY
+DOMAIN-SUFFIX,beget.app,PROXY
+DOMAIN-SUFFIX,beget.cloud,PROXY
 DOMAIN-SUFFIX,beget.com,PROXY
+DOMAIN-SUFFIX,beget.de,PROXY
+DOMAIN-SUFFIX,beget.hosting,PROXY
+DOMAIN-SUFFIX,beget.pro,PROXY
 DOMAIN-SUFFIX,beget.ru,PROXY
+DOMAIN-SUFFIX,beget.tech,PROXY
+DOMAIN-SUFFIX,begetcdn.cloud,PROXY
 DOMAIN-SUFFIX,begin-trade.com,PROXY
 DOMAIN-SUFFIX,behance.net,PROXY
 DOMAIN-SUFFIX,behindthescreenz.com,PROXY
@@ -4149,6 +4157,7 @@ DOMAIN-SUFFIX,berlincompanions.com,PROXY
 DOMAIN-SUFFIX,berlinerbericht.de,PROXY
 DOMAIN-SUFFIX,berlintwitterwall.com,PROXY
 DOMAIN-SUFFIX,beru.ru,PROXY
+DOMAIN-SUFFIX,beserver.ru,PROXY
 DOMAIN-SUFFIX,best-sex-games.com,PROXY
 DOMAIN-SUFFIX,best2pay.net,PROXY
 DOMAIN-SUFFIX,best4bim.com,PROXY
@@ -4259,6 +4268,7 @@ DOMAIN-SUFFIX,bfads.net,PROXY
 DOMAIN-SUFFIX,bffshd.com,PROXY
 DOMAIN-SUFFIX,bfnn.org,PROXY
 DOMAIN-SUFFIX,bfsh.hk,PROXY
+DOMAIN-SUFFIX,bget.ru,PROXY
 DOMAIN-SUFFIX,bgicdn.com,PROXY
 DOMAIN-SUFFIX,bgm.tv,PROXY
 DOMAIN-SUFFIX,bgme.me,PROXY
@@ -9726,7 +9736,6 @@ DOMAIN-SUFFIX,flic.kr,PROXY
 DOMAIN-SUFFIX,flickr,PROXY
 DOMAIN-SUFFIX,flickr.com,PROXY
 DOMAIN-SUFFIX,flickr.net,PROXY
-DOMAIN-SUFFIX,flightsimulator.com,PROXY
 DOMAIN-SUFFIX,flipboard.com,PROXY
 DOMAIN-SUFFIX,flipfap.com,PROXY
 DOMAIN-SUFFIX,flipkart.com,PROXY
@@ -19834,6 +19843,7 @@ DOMAIN-SUFFIX,pussyspace.com,PROXY
 DOMAIN-SUFFIX,pussyspace.net,PROXY
 DOMAIN-SUFFIX,putinho.net,PROXY
 DOMAIN-SUFFIX,putty.org,PROXY
+DOMAIN-SUFFIX,pv-cdn.net,PROXY
 DOMAIN-SUFFIX,pvp.net,PROXY
 DOMAIN-SUFFIX,pvp.tv,PROXY
 DOMAIN-SUFFIX,pvt.sexy,PROXY
@@ -22024,6 +22034,7 @@ DOMAIN-SUFFIX,springernature.com,PROXY
 DOMAIN-SUFFIX,springwood.me,PROXY
 DOMAIN-SUFFIX,sprinklesapp.com,PROXY
 DOMAIN-SUFFIX,sproutcore.com,PROXY
+DOMAIN-SUFFIX,sprut.io,PROXY
 DOMAIN-SUFFIX,sptvbroadcast.com,PROXY
 DOMAIN-SUFFIX,sputnikglobe.com,PROXY
 DOMAIN-SUFFIX,sputnikimages.com,PROXY
@@ -26006,6 +26017,7 @@ DOMAIN-SUFFIX,xn--8uq428d76d.tokyo,PROXY
 DOMAIN-SUFFIX,xn--90ab.com,PROXY
 DOMAIN-SUFFIX,xn--90ab2c.xn--p1ai,PROXY
 DOMAIN-SUFFIX,xn--90absjljw3g.xn--p1ai,PROXY
+DOMAIN-SUFFIX,xn--90aefb9d.xn--p1ai,PROXY
 DOMAIN-SUFFIX,xn--90aifd0az.shop,PROXY
 DOMAIN-SUFFIX,xn--90aifd0azb.xn--p1acf,PROXY
 DOMAIN-SUFFIX,xn--90wwvt03e.com,PROXY
