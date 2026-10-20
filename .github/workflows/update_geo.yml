@@ -66,9 +66,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          rm -rf loyalsoldier
-          if [ -n "$(git status --porcelain geo loyalsoldier)" ]; then
-            git add -A geo loyalsoldier
+          # 旧布局 loyalsoldier/ 已在 2026-10-16 的迁移中从 srs 删除。
+          # 不要再用 "git status --porcelain geo loyalsoldier"：路径不存在时 git
+          # 以 128 退出（fatal: pathspec 'loyalsoldier' did not match any files），
+          # 这正是 2026-10-17 起定时任务一直失败的原因。
+          # 只在它仍被跟踪时才清理，路径不存在是正常情况。
+          git rm -rq --ignore-unmatch loyalsoldier
+          git add -A geo
+          if ! git diff --cached --quiet; then
             git commit -m "chore(geo): update geosite/geoip rule sets — $(date -u +'%Y-%m-%d')" \
               -m "$(tail -3 geo/convert.log | tr '\n' ' ')"
             git push origin HEAD:srs
