@@ -275,6 +275,8 @@ DOMAIN,impala-media-production.s3.amazonaws.com,PROXY
 DOMAIN,imperial.insendi.com,PROXY
 DOMAIN,incoming-telemetry.thunderbird.net,PROXY
 DOMAIN,incoming.telemetry.mozilla.org,PROXY
+DOMAIN,kp-config-smart-tv.akamaized.net,PROXY
+DOMAIN,kp-configs-smart-tv.s3.eu-central-1.amazonaws.com,PROXY
 DOMAIN,lastfm-img.freetls.fastly.net,PROXY
 DOMAIN,lastfm.freetls.fastly.net,PROXY
 DOMAIN,lazer.ppy.sh,PROXY
@@ -15251,6 +15253,7 @@ DOMAIN-SUFFIX,magentomobile.com,PROXY
 DOMAIN-SUFFIX,magestic.com,PROXY
 DOMAIN-SUFFIX,magicalmirai.com,PROXY
 DOMAIN-SUFFIX,magicmovies.com,PROXY
+DOMAIN-SUFFIX,magnific.com,PROXY
 DOMAIN-SUFFIX,mahajantech.com,PROXY
 DOMAIN-SUFFIX,mahjongsoul.com,PROXY
 DOMAIN-SUFFIX,maidonanews.jp,PROXY
@@ -16722,6 +16725,7 @@ DOMAIN-SUFFIX,mt.lv,PROXY
 DOMAIN-SUFFIX,mt0011.site,PROXY
 DOMAIN-SUFFIX,mtao.fun,PROXY
 DOMAIN-SUFFIX,mthruf.com,PROXY
+DOMAIN-SUFFIX,mts-link.ru,PROXY
 DOMAIN-SUFFIX,mts-ws.net,PROXY
 DOMAIN-SUFFIX,mts.ru,PROXY
 DOMAIN-SUFFIX,mtsbank.ru,PROXY
@@ -19570,6 +19574,7 @@ DOMAIN-SUFFIX,postgresql.org,PROXY
 DOMAIN-SUFFIX,postimages.org,PROXY
 DOMAIN-SUFFIX,postimg.cc,PROXY
 DOMAIN-SUFFIX,postini.com,PROXY
+DOMAIN-SUFFIX,postman.com,PROXY
 DOMAIN-SUFFIX,posts.careerengine.us,PROXY
 DOMAIN-SUFFIX,posty.kr,PROXY
 DOMAIN-SUFFIX,postyourgirls.ws,PROXY
