@@ -39,6 +39,7 @@ DOMAIN,app-analytics-services.com,DIRECT
 DOMAIN,app-measurement-cn.com,DIRECT
 DOMAIN,app-measurement.com,DIRECT
 DOMAIN,app-site-association.cdn-apple.com,DIRECT
+DOMAIN,app.moegirl.org.cn,DIRECT
 DOMAIN,appldnld.apple.com,DIRECT
 DOMAIN,appldnld.g.aaplimg.com,DIRECT
 DOMAIN,appleid.cdn-apple.com,DIRECT
@@ -487,6 +488,7 @@ DOMAIN,statics.teams.cdn.office.net,DIRECT
 DOMAIN,status.alibabacloud.com,DIRECT
 DOMAIN,stocks-sparkline-lb.apple.com.akadns.net,DIRECT
 DOMAIN,stocks-sparkline.apple.com,DIRECT
+DOMAIN,storage.moegirl.org.cn,DIRECT
 DOMAIN,store.apple.com,DIRECT
 DOMAIN,store.apple.com.edgekey.net,DIRECT
 DOMAIN,store.apple.com.edgekey.net.globalredir.akadns.net,DIRECT
@@ -19683,6 +19685,7 @@ DOMAIN-SUFFIX,cdqszz.com,DIRECT
 DOMAIN-SUFFIX,cdqz.net,DIRECT
 DOMAIN-SUFFIX,cdrbs.net,DIRECT
 DOMAIN-SUFFIX,cdrcb.com,DIRECT
+DOMAIN-SUFFIX,cdrcbank.com,DIRECT
 DOMAIN-SUFFIX,cdren.net,DIRECT
 DOMAIN-SUFFIX,cdrich.com,DIRECT
 DOMAIN-SUFFIX,cdrjob.com,DIRECT
@@ -25548,6 +25551,7 @@ DOMAIN-SUFFIX,cqyxzz.com,DIRECT
 DOMAIN-SUFFIX,cqyygz.com,DIRECT
 DOMAIN-SUFFIX,cqyyjc.com,DIRECT
 DOMAIN-SUFFIX,cqyysx.com,DIRECT
+DOMAIN-SUFFIX,cqyyxc.com,DIRECT
 DOMAIN-SUFFIX,cqyyzy.com,DIRECT
 DOMAIN-SUFFIX,cqyznews.com,DIRECT
 DOMAIN-SUFFIX,cqzbcg.com,DIRECT
@@ -49057,6 +49061,7 @@ DOMAIN-SUFFIX,ibaitiao.com,DIRECT
 DOMAIN-SUFFIX,ibaizhu.com,DIRECT
 DOMAIN-SUFFIX,ibanana.club,DIRECT
 DOMAIN-SUFFIX,ibanbu.com,DIRECT
+DOMAIN-SUFFIX,ibangbank.com,DIRECT
 DOMAIN-SUFFIX,ibanggo.com,DIRECT
 DOMAIN-SUFFIX,ibangkf.com,DIRECT
 DOMAIN-SUFFIX,ibangtiao.com,DIRECT
@@ -51128,6 +51133,7 @@ DOMAIN-SUFFIX,ishuw.com,DIRECT
 DOMAIN-SUFFIX,isi-gf.com,DIRECT
 DOMAIN-SUFFIX,isiabio.com,DIRECT
 DOMAIN-SUFFIX,isign.ren,DIRECT
+DOMAIN-SUFFIX,isigning.com,DIRECT
 DOMAIN-SUFFIX,isigu.com,DIRECT
 DOMAIN-SUFFIX,isilent.me,DIRECT
 DOMAIN-SUFFIX,isilicontech.com,DIRECT
@@ -65505,7 +65511,6 @@ DOMAIN-SUFFIX,moeelf.com,DIRECT
 DOMAIN-SUFFIX,moefactory.com,DIRECT
 DOMAIN-SUFFIX,moefantasy.com,DIRECT
 DOMAIN-SUFFIX,moefou.org,DIRECT
-DOMAIN-SUFFIX,moegirl.org,DIRECT
 DOMAIN-SUFFIX,moegirl.tw,DIRECT
 DOMAIN-SUFFIX,moehot.com,DIRECT
 DOMAIN-SUFFIX,moehu.org,DIRECT
@@ -66938,6 +66943,7 @@ DOMAIN-SUFFIX,nanningyouhua.com,DIRECT
 DOMAIN-SUFFIX,nannjlnk.com,DIRECT
 DOMAIN-SUFFIX,nanobody-biolab.com,DIRECT
 DOMAIN-SUFFIX,nanochrom.com,DIRECT
+DOMAIN-SUFFIX,nanocorechip.com,DIRECT
 DOMAIN-SUFFIX,nanoeast.net,DIRECT
 DOMAIN-SUFFIX,nanoer.net,DIRECT
 DOMAIN-SUFFIX,nanoinglobal.com,DIRECT
@@ -110580,7 +110586,6 @@ DOMAIN-SUFFIX,apple-icloud.cn,DIRECT
 DOMAIN-SUFFIX,appleicloud.cn,DIRECT
 DOMAIN-SUFFIX,icloud-apple.cn,DIRECT
 DOMAIN-SUFFIX,icloud-content.com.cn,DIRECT
-DOMAIN-SUFFIX,icloud.cn,DIRECT
 DOMAIN-SUFFIX,icloud.com.cn,DIRECT
 DOMAIN-SUFFIX,icloud.net.cn,DIRECT
 DOMAIN-SUFFIX,icloudapple.cn,DIRECT
