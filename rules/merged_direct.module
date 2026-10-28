@@ -470,7 +470,9 @@ DOMAIN,seed.siri.apple.com,DIRECT
 DOMAIN,sequoia.apple.com,DIRECT
 DOMAIN,service.urchin.com,DIRECT
 DOMAIN,sf-api-token-service.itunes.apple.com,DIRECT
+DOMAIN,sh-pod1-smp-device.apple.com,DIRECT
 DOMAIN,sh-pod2-smp-device.apple.com,DIRECT
+DOMAIN,sh-pod3-smp-device.apple.com,DIRECT
 DOMAIN,shazam-insights.cdn-apple.com,DIRECT
 DOMAIN,shell.cdn.office.net,DIRECT
 DOMAIN,smp-device-content.apple.com,DIRECT
@@ -61416,8 +61418,6 @@ DOMAIN-SUFFIX,long7.com,DIRECT
 DOMAIN-SUFFIX,longanlaw.com,DIRECT
 DOMAIN-SUFFIX,longau.com,DIRECT
 DOMAIN-SUFFIX,longbenren.com,DIRECT
-DOMAIN-SUFFIX,longbridgeapp.com,DIRECT
-DOMAIN-SUFFIX,longbridgehk.com,DIRECT
 DOMAIN-SUFFIX,longcai.com,DIRECT
 DOMAIN-SUFFIX,longcai027.com,DIRECT
 DOMAIN-SUFFIX,longcat.chat,DIRECT
