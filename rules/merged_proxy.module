@@ -23476,6 +23476,7 @@ DOMAIN-SUFFIX,toroporno.com,PROXY
 DOMAIN-SUFFIX,torproject.org,PROXY
 DOMAIN-SUFFIX,torrentgalaxy.to,PROXY
 DOMAIN-SUFFIX,torrentkitty.tv,PROXY
+DOMAIN-SUFFIX,torrentleech.org,PROXY
 DOMAIN-SUFFIX,torrentprivacy.com,PROXY
 DOMAIN-SUFFIX,torrentproject.se,PROXY
 DOMAIN-SUFFIX,torrenty.org,PROXY
@@ -27054,6 +27055,7 @@ DOMAIN-SUFFIX,youtubego.in,PROXY
 DOMAIN-SUFFIX,youtubekids.com,PROXY
 DOMAIN-SUFFIX,youtubemobilesupport.com,PROXY
 DOMAIN-SUFFIX,youversion.com,PROXY
+DOMAIN-SUFFIX,youversionapi.com,PROXY
 DOMAIN-SUFFIX,youwin.com,PROXY
 DOMAIN-SUFFIX,youwuss.com,PROXY
 DOMAIN-SUFFIX,youx.xxx,PROXY
@@ -27339,6 +27341,7 @@ DOMAIN-SUFFIX,api-verify.recaptcha.net,PROXY
 DOMAIN-SUFFIX,api.pureapk.com,PROXY
 DOMAIN-SUFFIX,api.recaptcha.net,PROXY
 DOMAIN-SUFFIX,api.steampowered.com,PROXY
+DOMAIN-SUFFIX,api.themoviedb.org,PROXY
 DOMAIN-SUFFIX,app.cloudcone.com,PROXY
 DOMAIN-SUFFIX,app.element.io,PROXY
 DOMAIN-SUFFIX,assets.bwbx.io,PROXY
