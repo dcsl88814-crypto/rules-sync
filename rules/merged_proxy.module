@@ -271,6 +271,7 @@ DOMAIN,holoxx.f5.si,PROXY
 DOMAIN,homebrew.bintray.com,PROXY
 DOMAIN,hpefonts.s3.amazonaws.com,PROXY
 DOMAIN,hpstore.corpmerchandise.com,PROXY
+DOMAIN,http-intake.logs.us5.datadoghq.com,PROXY
 DOMAIN,hub.slarker.me,PROXY
 DOMAIN,hulu.playback.edge.bamgrid.com,PROXY
 DOMAIN,i.jeded.com,PROXY
@@ -356,6 +357,7 @@ DOMAIN,ntppool2.time.nl,PROXY
 DOMAIN,nurofensk-prod-env.eu-west-1.elasticbeanstalk.com,PROXY
 DOMAIN,nvidia.custhelp.com,PROXY
 DOMAIN,nvidia.tt.omtrdc.net,PROXY
+DOMAIN,o1158394.ingest.us.sentry.io,PROXY
 DOMAIN,ocsp.microsoft.com,PROXY
 DOMAIN,officecdn-microsoft-com.akamaized.net,PROXY
 DOMAIN,onekey.zendesk.com,PROXY
@@ -384,6 +386,7 @@ DOMAIN,practivate.adobe.com,PROXY
 DOMAIN,prd-priconne-redive.akamaized.net,PROXY
 DOMAIN,preprod-publicca.googleapis.com,PROXY
 DOMAIN,prodforza.blob.core.windows.net,PROXY
+DOMAIN,production-copilot-host-westus.webpubsub.azure.com,PROXY
 DOMAIN,production-openaicom-storage.azureedge.net,PROXY
 DOMAIN,productionresultssa0.blob.core.windows.net,PROXY
 DOMAIN,productionresultssa1.blob.core.windows.net,PROXY
@@ -11437,6 +11440,7 @@ DOMAIN-SUFFIX,greginhollywood.com,PROXY
 DOMAIN-SUFFIX,gridaware.app,PROXY
 DOMAIN-SUFFIX,grindr.com,PROXY
 DOMAIN-SUFFIX,grok.com,PROXY
+DOMAIN-SUFFIX,grokbot.com,PROXY
 DOMAIN-SUFFIX,grokipedia.com,PROXY
 DOMAIN-SUFFIX,grooby.com,PROXY
 DOMAIN-SUFFIX,groq.com,PROXY
@@ -28207,6 +28211,17 @@ DOMAIN-SUFFIX,seven,PROXY
 DOMAIN-SUFFIX,bauhaus,PROXY
 DOMAIN-SUFFIX,latrobe,PROXY
 DOMAIN-SUFFIX,monash,PROXY
+DOMAIN-SUFFIX,moscow,PROXY
+DOMAIN-SUFFIX,ru,PROXY
+DOMAIN-SUFFIX,su,PROXY
+DOMAIN-SUFFIX,tatar,PROXY
+DOMAIN-SUFFIX,xn--80adxhks,PROXY
+DOMAIN-SUFFIX,xn--80asehdb,PROXY
+DOMAIN-SUFFIX,xn--80aswg,PROXY
+DOMAIN-SUFFIX,xn--c1avg,PROXY
+DOMAIN-SUFFIX,xn--d1acj3b,PROXY
+DOMAIN-SUFFIX,xn--p1acf,PROXY
+DOMAIN-SUFFIX,xn--p1ai,PROXY
 DOMAIN-SUFFIX,meme,PROXY
 DOMAIN-SUFFIX,ing,PROXY
 DOMAIN-SUFFIX,foo,PROXY
@@ -28226,17 +28241,6 @@ DOMAIN-SUFFIX,app,PROXY
 DOMAIN-SUFFIX,how,PROXY
 DOMAIN-SUFFIX,soy,PROXY
 DOMAIN-SUFFIX,xn--q9jyb4c,PROXY
-DOMAIN-SUFFIX,moscow,PROXY
-DOMAIN-SUFFIX,ru,PROXY
-DOMAIN-SUFFIX,su,PROXY
-DOMAIN-SUFFIX,tatar,PROXY
-DOMAIN-SUFFIX,xn--80adxhks,PROXY
-DOMAIN-SUFFIX,xn--80asehdb,PROXY
-DOMAIN-SUFFIX,xn--80aswg,PROXY
-DOMAIN-SUFFIX,xn--c1avg,PROXY
-DOMAIN-SUFFIX,xn--d1acj3b,PROXY
-DOMAIN-SUFFIX,xn--p1acf,PROXY
-DOMAIN-SUFFIX,xn--p1ai,PROXY
 IP-CIDR,91.105.192.0/23,PROXY
 IP-CIDR,91.108.4.0/22,PROXY
 IP-CIDR,91.108.8.0/21,PROXY
