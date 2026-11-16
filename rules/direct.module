@@ -116,6 +116,7 @@ DOMAIN,collaborateppe.download.prss.microsoft.com,DIRECT
 DOMAIN,communities.apple.com,DIRECT
 DOMAIN,configuration.apple.com,DIRECT
 DOMAIN,configuration.apple.com.akadns.net,DIRECT
+DOMAIN,configuration.ls.apple.com,DIRECT
 DOMAIN,connectivitycheck.gstatic.com,DIRECT
 DOMAIN,crashlyticsreports-pa.googleapis.com,DIRECT
 DOMAIN,crl-lb.apple.com.akadns.net,DIRECT
@@ -332,10 +333,12 @@ DOMAIN,msdn.download.prss.microsoft.com,DIRECT
 DOMAIN,msdprod-ad.download.prss.microsoft.com,DIRECT
 DOMAIN,msproduct.download.prss.microsoft.com,DIRECT
 DOMAIN,music.apple.com,DIRECT
+DOMAIN,musicstatus.itunes.apple.com,DIRECT
 DOMAIN,musicstatus.music.apple.com,DIRECT
 DOMAIN,mvod.itunes.apple.com,DIRECT
 DOMAIN,myapp.itunes.apple.com,DIRECT
 DOMAIN,myvs.download.prss.microsoft.com,DIRECT
+DOMAIN,mzstorekit.itunes.apple.com,DIRECT
 DOMAIN,np-edge.itunes.apple.com,DIRECT
 DOMAIN,ntp.aliyun.com,DIRECT
 DOMAIN,ntp.tencent.com,DIRECT
@@ -18576,6 +18579,7 @@ DOMAIN-SUFFIX,caps-china.org,DIRECT
 DOMAIN-SUFFIX,capsuleshanghai.com,DIRECT
 DOMAIN-SUFFIX,captain-cro.com,DIRECT
 DOMAIN-SUFFIX,captainbi.com,DIRECT
+DOMAIN-SUFFIX,captive.apple.com,DIRECT
 DOMAIN-SUFFIX,capturetheflag.fun,DIRECT
 DOMAIN-SUFFIX,capvision.com,DIRECT
 DOMAIN-SUFFIX,capwhale.com,DIRECT
